@@ -101,3 +101,11 @@ hashmap.c:50:33: note: previous implicit declaration of ‘_strdup’ with type 
 cc1: all warnings being treated as errors
 Compilation failed
 6ac638a
+Thu 07 Sep 2023 07:41:57 PM UTC: 
+ hashmap.c | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
+/nix/store/039g378vc3pc3dvi9dzdlrd0i4q93qwf-binutils-2.39/bin/ld: /tmp/ccGk7usZ.o: in function `enlarge_test':
+test.c:(.text+0x11c0): undefined reference to `enlarge'
+collect2: error: ld returned 1 exit status
+Compilation failed
+b936a17

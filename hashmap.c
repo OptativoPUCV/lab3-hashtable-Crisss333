@@ -47,7 +47,8 @@ void insertMap(HashMap * map, char * key, void * value) {
 
     long index = hash(key, map->capacity);
 
-    Pair * newPair = createPair(_strdup(key), value);
+    // Usar strdup en lugar de _strdup
+    Pair * newPair = createPair(strdup(key), value);
 
     if (newPair == NULL) {
         // Manejar el error de memoria insuficiente aquí si es necesario.
@@ -63,13 +64,6 @@ void insertMap(HashMap * map, char * key, void * value) {
     map->buckets[index] = newPair;
     map->size++;
     map->current = index;
-}
-
-
-void enlarge(HashMap * map) {
-    enlarge_called = 1; //no borrar (testing purposes)
-
-
 }
 
 
