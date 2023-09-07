@@ -39,27 +39,7 @@ int is_equal(void* key1, void* key2){
 }
 
 
-void insertMap(HashMap * map, char * key, void * value) {
-    if (map == NULL || key == NULL) {
-        // Verificación de asignación de memoria.
-        return;
-    }
 
-    long index = hash(key, map->capacity);
-
-    Pair * newPair = createPair(key, value);
-
-    if (newPair == NULL) {
-        // Verificación de asignación de memoria.
-        return;
-    }
-
-    // Insertar en la lista vinculada en la posición 'index' del mapa.
-    newPair->next = map->buckets[index];
-    map->buckets[index] = newPair;
-    map->size++;
-    map->current = index;
-}
 
 void enlarge(HashMap * map) {
     enlarge_called = 1; //no borrar (testing purposes)
@@ -92,6 +72,30 @@ HashMap * createMap(long capacity) {
 
     return map;
 }
+
+void insertMap(HashMap * map, char * key, void * value) {
+    if (map == NULL || key == NULL) {
+        // Verificación de asignación de memoria.
+        return;
+    }
+
+    long index = hash(key, map->capacity);
+
+    Pair * newPair = createPair(key, value);
+
+    if (newPair == NULL) {
+        // Verificación de asignación de memoria.
+        return;
+    }
+
+    // Insertar en la lista vinculada en la posición 'index' del mapa.
+    newPair->next = map->buckets[index];
+    map->buckets[index] = newPair;
+    map->size++;
+    map->current = index;
+}
+
+
 
 void eraseMap(HashMap * map,  char * key) {    
 
