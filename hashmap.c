@@ -56,17 +56,13 @@ void insertMap(HashMap * map, char * key, void * value) {
     }
 
     // Verificar si la casilla ya está ocupada
-    if (map->buckets[index] == NULL) {
-        // Si la casilla está vacía, simplemente inserta el nuevo par.
-        map->buckets[index] = newPair;
-    } else {
-        // Si la casilla ya está ocupada, maneja la colisión mediante una lista vinculada.
-        Pair * current = map->buckets[index];
-        while (current->next != NULL) {
-            current = current->next;
-        }
-        current->next = newPair;
+    while (map->buckets[index] != NULL) {
+        // Si la casilla está ocupada, intenta el siguiente índice (sondeo lineal)
+        index = (index + 1) % map->capacity;
     }
+
+    // Inserta el nuevo par en la casilla vacía encontrada
+    map->buckets[index] = newPair;
 
     map->size++;
     map->current = index;
