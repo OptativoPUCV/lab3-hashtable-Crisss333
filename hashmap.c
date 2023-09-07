@@ -20,7 +20,6 @@ Pair * createPair( char * key,  void * value) {
     Pair * new = (Pair *)malloc(sizeof(Pair));
     new->key = key;
     new->value = value;
-    Pair * next; // Apuntador al siguiente par en caso de colisión
     return new;
 }
 
@@ -42,21 +41,25 @@ int is_equal(void* key1, void* key2){
 
 void insertMap(HashMap * map, char * key, void * value) {
     if (map == NULL || key == NULL) {
-        // Verificación de asignación de memoria.
+        // Manejar casos de error aquí si es necesario.
         return;
     }
 
     long index = hash(key, map->capacity);
 
-    Pair * newPair = createPair(key, value);
+    Pair * newPair = createPair(_strdup(key), value);
 
     if (newPair == NULL) {
-        // Verificación de asignación de memoria.
+        // Manejar el error de memoria insuficiente aquí si es necesario.
         return;
     }
 
-    // Insertar en la lista vinculada en la posición 'index' del mapa.
-    newPair->next = map->buckets[index];
+    // Liberar la memoria ocupada por el valor anterior si existe
+    if (map->buckets[index] != NULL) {
+        free(map->buckets[index]->value);
+    }
+
+    // Actualizar el par en el bucket correspondiente
     map->buckets[index] = newPair;
     map->size++;
     map->current = index;
