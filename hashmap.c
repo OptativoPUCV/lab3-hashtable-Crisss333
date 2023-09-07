@@ -20,6 +20,7 @@ Pair * createPair( char * key,  void * value) {
     Pair * new = (Pair *)malloc(sizeof(Pair));
     new->key = key;
     new->value = value;
+    
     return new;
 }
 
@@ -64,6 +65,13 @@ void insertMap(HashMap * map, char * key, void * value) {
     map->buckets[index] = newPair;
     map->size++;
     map->current = index;
+}
+
+
+void enlarge(HashMap * map) {
+    enlarge_called = 1; //no borrar (testing purposes)
+
+
 }
 
 
