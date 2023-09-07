@@ -20,7 +20,7 @@ Pair * createPair( char * key,  void * value) {
     Pair * new = (Pair *)malloc(sizeof(Pair));
     new->key = key;
     new->value = value;
-    struct Pair * next; // Apuntador al siguiente par en caso de colisión
+    Pair * next; // Apuntador al siguiente par en caso de colisión
     return new;
 }
 

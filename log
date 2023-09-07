@@ -58,3 +58,18 @@ hashmap.c:59:12: error: ‘Pair’ has no member named ‘next’
 cc1: all warnings being treated as errors
 Compilation failed
 522d4f0
+Thu 07 Sep 2023 07:37:01 PM UTC: 
+ hashmap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+In file included from test.c:4:
+hashmap.c: In function ‘createPair’:
+hashmap.c:23:12: error: unused variable ‘next’ [-Werror=unused-variable]
+   23 |     Pair * next; // Apuntador al siguiente par en caso de colisión
+      |            ^~~~
+hashmap.c: In function ‘insertMap’:
+hashmap.c:59:12: error: ‘Pair’ has no member named ‘next’
+   59 |     newPair->next = map->buckets[index];
+      |            ^~
+cc1: all warnings being treated as errors
+Compilation failed
+5d3871e
