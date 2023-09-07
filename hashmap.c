@@ -48,7 +48,6 @@ void insertMap(HashMap * map, char * key, void * value) {
 
     long index = hash(key, map->capacity);
 
-    // Usar strdup en lugar de _strdup
     Pair * newPair = createPair(strdup(key), value);
 
     if (newPair == NULL) {
@@ -56,13 +55,19 @@ void insertMap(HashMap * map, char * key, void * value) {
         return;
     }
 
-    // Liberar la memoria ocupada por el valor anterior si existe
-    if (map->buckets[index] != NULL) {
-        free(map->buckets[index]->value);
+    // Verificar si la casilla ya está ocupada
+    if (map->buckets[index] == NULL) {
+        // Si la casilla está vacía, simplemente inserta el nuevo par.
+        map->buckets[index] = newPair;
+    } else {
+        // Si la casilla ya está ocupada, maneja la colisión mediante una lista vinculada.
+        Pair * current = map->buckets[index];
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newPair;
     }
 
-    // Actualizar el par en el bucket correspondiente
-    map->buckets[index] = newPair;
     map->size++;
     map->current = index;
 }
