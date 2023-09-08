@@ -186,7 +186,7 @@ Pair * firstMap(HashMap * map) {
     }
 
     // Inicializar el índice current en 0
-    map->current = 1;
+    map->current = 0;
 
     // Encontrar el primer par válido y devolverlo
     while (map->current < map->capacity) {
