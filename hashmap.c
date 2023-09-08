@@ -99,6 +99,9 @@ void enlarge(HashMap * map) {
         return;
     }
 
+    // Reinicializar el tamaño a 0
+    map->size = 0;
+
     // Insertar los elementos del antiguo arreglo en el nuevo mapa
     for (long i = 0; i < map->capacity / 2; i++) {
         if (old_buckets[i] != NULL && old_buckets[i]->key != NULL) {
