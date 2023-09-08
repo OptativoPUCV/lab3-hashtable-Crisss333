@@ -78,13 +78,10 @@ void insertMap(HashMap * map, char * key, void * value) {
     map->current = index;
 }
 
-
-
 void enlarge(HashMap * map) {
     enlarge_called = 1; //no borrar (testing purposes)
 
 }
-
 
 HashMap * createMap(long capacity) {
     HashMap * map = (HashMap *)malloc(sizeof(HashMap));
@@ -117,8 +114,39 @@ void eraseMap(HashMap * map,  char * key) {
 
 }
 
-Pair * searchMap(HashMap * map,  char * key) {   
+Pair * searchMap(HashMap * map,  char * key) {
+    if (map == NULL && key == NULL) {
+        // Manejar casos de error aquí si es necesario.
+        return NULL;
+    }
 
+    // Calcular el índice utilizando la función hash
+    long index = hash(key, map->capacity);
+
+    // Inicializar el resultado como NULL
+    Pair * result = NULL;
+
+    // Buscar el par con la clave en el mapa
+    while (1) {
+        // Verificar si la casilla actual contiene un par
+        if (map->buckets[index] != NULL) {
+            // Comprobar si la clave del par actual coincide con la clave buscada
+            if (is_equal(map->buckets[index]->key, key)) {
+                // Encontramos el par con la clave buscada
+                result = map->buckets[index];
+                break;
+            }
+        } else {
+            // Hemos llegado a una casilla nula, la clave no está en el mapa
+            break;
+        }
+
+        // Avanzar al siguiente índice (sondeo lineal)
+        index = (index + 1) % map->capacity;
+    }
+
+    // Actualizar el índice current a la posición encontrada
+    map->current = index;
 
     return NULL;
 }

@@ -149,3 +149,14 @@ Fri 08 Sep 2023 06:10:56 PM UTC:
  tests:  5|4
 total_score: 30/70
 0f3b249
+Fri 08 Sep 2023 06:15:31 PM UTC: 
+ hashmap.c | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+In file included from test.c:4:
+hashmap.c: In function ‘searchMap’:
+hashmap.c:127:12: error: variable ‘result’ set but not used [-Werror=unused-but-set-variable]
+  127 |     Pair * result = NULL;
+      |            ^~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+6ce9cbc
