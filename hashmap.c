@@ -200,6 +200,21 @@ Pair * firstMap(HashMap * map) {
 }
 
 Pair * nextMap(HashMap * map) {
+    if (map == NULL) {
+        // Manejar casos de error aquí si es necesario.
+        return NULL;
+    }
 
-    return NULL;
+    // Avanzar al siguiente índice desde current
+    map->current++;
+
+    // Encontrar el siguiente Pair válido y devolverlo
+    while (map->current < map->capacity) {
+        if (map->buckets[map->current] != NULL && map->buckets[map->current]->key != NULL) {
+            return map->buckets[map->current];
+        }
+        map->current++;
+    }
+
+    return NULL; // No se encontraron más Pairs válidos
 }
