@@ -39,7 +39,7 @@ int is_equal(void* key1, void* key2){
     return 0;
 }
 
-
+/*
 void insertMap(HashMap * map, char * key, void * value) {
     if (map == NULL || key == NULL) {
         // Manejar casos de error aquí si es necesario.
@@ -67,11 +67,50 @@ void insertMap(HashMap * map, char * key, void * value) {
     map->size++;
     map->current = index;
 }
+*/
+void insertMap(HashMap * map, char * key, void * value) {
+    if (map == NULL || key == NULL) {
+        // Manejar casos de error aquí si es necesario.
+        return;
+    }
+
+    // Calcular el índice utilizando la función hash
+    long index = hash(key, map->capacity);
+
+    // Buscar una casilla disponible para insertar el nuevo par
+    while (map->buckets[index] != NULL) {
+        // Si la casilla está ocupada, verifica si la clave ya existe
+        if (is_equal(map->buckets[index]->key, key)) {
+            // La clave ya existe, no se permite claves repetidas
+            return;
+        }
+
+        // Avanza al siguiente índice (sondeo lineal)
+        index = (index + 1) % map->capacity;
+    }
+
+    // Crear un nuevo par con la clave y el valor
+    Pair * newPair = createPair(strdup(key), value);
+
+    if (newPair == NULL) {
+        // Manejar el error de memoria insuficiente aquí si es necesario.
+        return;
+    }
+
+    // Insertar el nuevo par en la casilla vacía encontrada
+    map->buckets[index] = newPair;
+
+    // Actualizar el tamaño del mapa
+    map->size++;
+
+    // Actualizar el índice current
+    map->current = index;
+}
+
 
 
 void enlarge(HashMap * map) {
     enlarge_called = 1; //no borrar (testing purposes)
-
 
 }
 
