@@ -11,7 +11,7 @@ int enlarge_called=0;
 
 struct HashMap {
     Pair ** buckets;
-    long size; //cantidad de datos/pairs en la tabla
+    long size; //cantidad de datos/pares en la tabla
     long capacity; //capacidad de la tabla
     long current; //indice del ultimo dato accedido
 };
@@ -41,7 +41,7 @@ int is_equal(void* key1, void* key2){
 
 void insertMap(HashMap * map, char * key, void * value) {
     if (map == NULL || key == NULL) {
-        // Manejar casos de error aquí si es necesario.
+        // Verificación de entradas
         return;
     }
 
@@ -52,7 +52,7 @@ void insertMap(HashMap * map, char * key, void * value) {
     while (map->buckets[index] != NULL) {
         // Si la casilla está ocupada, verifica si la clave ya existe
         if (is_equal(map->buckets[index]->key, key)) {
-            // La clave ya existe, no se permite claves repetidas
+            // La clave ya existe, no se permiten claves repetidas
             return;
         }
 
@@ -64,7 +64,7 @@ void insertMap(HashMap * map, char * key, void * value) {
     Pair * newPair = createPair(strdup(key), value);
 
     if (newPair == NULL) {
-        // Manejar el error de memoria insuficiente aquí si es necesario.
+        // Error de memoria insuficiente.
         return;
     }
 
@@ -81,7 +81,7 @@ void insertMap(HashMap * map, char * key, void * value) {
 void enlarge(HashMap * map) {
     enlarge_called = 1; //no borrar (testing purposes)
     if (map == NULL) {
-        // Manejar casos de error aquí si es necesario.
+        // Verificación de entrada
         return;
     }
 
@@ -95,7 +95,7 @@ void enlarge(HashMap * map) {
     map->buckets = (Pair **)calloc(map->capacity, sizeof(Pair *));
 
     if (map->buckets == NULL) {
-        // Manejar el error de memoria insuficiente aquí si es necesario.
+        // Error de memoria insuficiente.
         return;
     }
 
@@ -110,7 +110,7 @@ void enlarge(HashMap * map) {
         }
     }
 
-    // Liberar la memoria del antiguo arreglo (no necesitas liberar los pares individuales)
+    // Liberar la memoria del antiguo arreglo (no es necesario liberar los pares individuales)
     free(old_buckets);
 }
 
@@ -143,7 +143,7 @@ HashMap * createMap(long capacity) {
 
 void eraseMap(HashMap * map,  char * key) {
     if (map == NULL || key == NULL) {
-        // Manejar casos de error aquí si es necesario.
+        // Verificación de entradas
         return;
     }
 
@@ -163,7 +163,7 @@ void eraseMap(HashMap * map,  char * key) {
                 break;
             }
         } else {
-            // Hemos llegado a una casilla nula, la clave no está en el mapa
+            // Hemos llegado a una casilla nula, por tanto la clave no está en el mapa
             break;
         }
 
@@ -176,7 +176,7 @@ void eraseMap(HashMap * map,  char * key) {
 
 Pair * searchMap(HashMap * map,  char * key) {
     if (map == NULL || key == NULL) {
-        // Manejar casos de error aquí si es necesario.
+        // Verificación de entradas
         return NULL;
     }
 
@@ -213,7 +213,7 @@ Pair * searchMap(HashMap * map,  char * key) {
 
 Pair * firstMap(HashMap * map) {
     if (map == NULL) {
-        // Manejar casos de error aquí si es necesario.
+        // Verificación de entrada
         return NULL;
     }
 
@@ -233,14 +233,14 @@ Pair * firstMap(HashMap * map) {
 
 Pair * nextMap(HashMap * map) {
     if (map == NULL) {
-        // Manejar casos de error aquí si es necesario.
+        // Verificación de entrada
         return NULL;
     }
 
     // Avanzar al siguiente índice desde current
     map->current++;
 
-    // Encontrar el siguiente Pair válido y devolverlo
+    // Encontrar el siguiente par válido y devolverlo
     while (map->current < map->capacity) {
         if (map->buckets[map->current] != NULL && map->buckets[map->current]->key != NULL) {
             return map->buckets[map->current];
@@ -248,5 +248,5 @@ Pair * nextMap(HashMap * map) {
         map->current++;
     }
 
-    return NULL; // No se encontraron más Pairs válidos
+    return NULL; // No se encontraron más pares válidos
 }
