@@ -109,9 +109,37 @@ HashMap * createMap(long capacity) {
 }
 
 
-void eraseMap(HashMap * map,  char * key) {    
+void eraseMap(HashMap * map,  char * key) {
+    if (map == NULL || key == NULL) {
+        // Manejar casos de error aquí si es necesario.
+        return;
+    }
 
+    // Calcular el índice utilizando la función hash
+    int index = hash(key, map->capacity);
 
+    // Buscar el par con la clave en el mapa
+    while (1) {
+        // Verificar si la casilla actual contiene un par
+        if (map->buckets[index] != NULL) {
+            // Comprobar si la clave del par actual coincide con la clave buscada
+            if (is_equal(map->buckets[index]->key, key)) {
+                // Marcar el par como no válido asignando NULL a la clave
+                map->buckets[index]->key = NULL;
+                // Actualizar el tamaño del mapa
+                map->size++;
+                break;
+            }
+        } else {
+            // Hemos llegado a una casilla nula, la clave no está en el mapa
+            break;
+        }
+
+        // Avanzar al siguiente índice (sondeo lineal)
+        index = (index + 1) % map->capacity;
+    }
+
+    // No es necesario actualizar el índice current en este caso.
 }
 
 Pair * searchMap(HashMap * map,  char * key) {
