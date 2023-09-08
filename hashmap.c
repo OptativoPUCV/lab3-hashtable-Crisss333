@@ -111,7 +111,7 @@ void enlarge(HashMap * map) {
     }
 
     // Liberar la memoria del antiguo arreglo (no necesitas liberar los pares individuales)
-    free(old_buckets);
+    //free(old_buckets);
 }
 
 
