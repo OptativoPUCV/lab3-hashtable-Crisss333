@@ -127,7 +127,7 @@ void eraseMap(HashMap * map,  char * key) {
                 // Marcar el par como no válido asignando NULL a la clave
                 map->buckets[index]->key = NULL;
                 // Actualizar el tamaño del mapa
-                map->size++;
+                map->size--;
                 break;
             }
         } else {
