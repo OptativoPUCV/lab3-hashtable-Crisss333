@@ -160,3 +160,9 @@ hashmap.c:127:12: error: variable ‘result’ set but not used [-Werror=unused-
 cc1: all warnings being treated as errors
 Compilation failed
 6ce9cbc
+Fri 08 Sep 2023 06:15:52 PM UTC: 
+ hashmap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests:  8|3
+total_score: 40/70
+bc16036

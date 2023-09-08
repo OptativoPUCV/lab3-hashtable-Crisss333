@@ -148,7 +148,7 @@ Pair * searchMap(HashMap * map,  char * key) {
     // Actualizar el índice current a la posición encontrada
     map->current = index;
 
-    return NULL;
+    return result;
 }
 
 Pair * firstMap(HashMap * map) {
