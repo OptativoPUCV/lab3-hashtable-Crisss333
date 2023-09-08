@@ -115,7 +115,7 @@ void eraseMap(HashMap * map,  char * key) {
 }
 
 Pair * searchMap(HashMap * map,  char * key) {
-    if (map == NULL && key == NULL) {
+    if (map == NULL || key == NULL) {
         // Manejar casos de error aquí si es necesario.
         return NULL;
     }
