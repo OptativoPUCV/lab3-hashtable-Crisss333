@@ -116,7 +116,7 @@ void eraseMap(HashMap * map,  char * key) {
     }
 
     // Calcular el índice utilizando la función hash
-    int index = hash(key, map->capacity);
+    long index = hash(key, map->capacity);
 
     // Buscar el par con la clave en el mapa
     while (1) {
