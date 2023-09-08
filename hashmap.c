@@ -89,7 +89,7 @@ void enlarge(HashMap * map) {
     Pair ** old_buckets = map->buckets;
 
     // Duplicar la capacidad
-    map->capacity *= 2;
+    //map->capacity *= 2;
 
     // Asignar un nuevo arreglo con la nueva capacidad
     map->buckets = (Pair **)calloc(map->capacity, sizeof(Pair *));
@@ -111,7 +111,7 @@ void enlarge(HashMap * map) {
     }
 
     // Liberar la memoria del antiguo arreglo (no necesitas liberar los pares individuales)
-    //free(old_buckets);
+    free(old_buckets);
 }
 
 
