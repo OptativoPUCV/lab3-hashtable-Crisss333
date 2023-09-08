@@ -180,8 +180,23 @@ Pair * searchMap(HashMap * map,  char * key) {
 }
 
 Pair * firstMap(HashMap * map) {
+    if (map == NULL) {
+        // Manejar casos de error aquí si es necesario.
+        return NULL;
+    }
 
-    return NULL;
+    // Inicializar el índice current en 0
+    map->current = 1;
+
+    // Encontrar el primer par válido y devolverlo
+    while (map->current < map->capacity) {
+        if (map->buckets[map->current] != NULL && map->buckets[map->current]->key != NULL) {
+            return map->buckets[map->current];
+        }
+        map->current++;
+    }
+
+    return NULL; // No se encontraron pares válidos
 }
 
 Pair * nextMap(HashMap * map) {
